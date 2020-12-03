@@ -206,7 +206,7 @@ dictionary = {}
 for current in data:
     complement = 2020 - current
     if current in dictionary.keys():
-        print("The result of Day2 is: " + str(current * dictionary[current]))
+        print("The result of Day #1.1 is: " + str(current * dictionary[current]))
         break
     else:
         dictionary[complement] = current

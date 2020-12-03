@@ -1,4 +1,4 @@
-data = [
+numbersList = [
     1941
     , 1887
     , 1851
@@ -203,12 +203,18 @@ data = [
 
 dictionary = {}
 
-for current in data:
-    complement = 2020 - current
-    if current in dictionary.keys():
-        print("The result of Day1 is: " + str(current * dictionary[current]))
+for currentNumber in numbersList:
+    for otherCurrentNumber in numbersList:
+        if currentNumber == otherCurrentNumber:
+            continue
+        else:
+            remaining = 2020 - currentNumber - otherCurrentNumber
+            if remaining > 0:
+                dictionary[remaining] = [currentNumber, otherCurrentNumber]
+
+for currentNumber in numbersList:
+    if currentNumber in dictionary.keys():
+        print("The result of Day #1.2 is: " + str(currentNumber * dictionary[currentNumber][0] * dictionary[currentNumber][1]))
         break
-    else:
-        dictionary[complement] = current
 
 print("</Fin>")
