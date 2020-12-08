@@ -940,10 +940,34 @@ def findMissingId(seats):
         seat = seat.replace(' ', '')
         allIds.append(computeId(seat))
     allIds.sort()
-    allSeats = []
-    [allSeats.append(i) for i in range(0,920)]
-    return allSeats - allIds
+    allIdsSet = set(allIds)
+    allSeatsSet = set([*range(970)])
+    return allSeatsSet - allIdsSet
 
-seats = completeData.split("\n")
-missingIds = findMissingId(seats)
-print(missingIds)
+# [[8, 4], [8, 5], [8, 6], [8, 7], [9, 0],... ]
+def prettyPrint(allSeatCoordinates):    
+    for r in [*range(0,127)]:
+        row = ""
+        for c in [*range(0,8)]:
+            if allSeatCoordinates.__contains__([r,c]):
+                row += 'x'
+            else:
+                row += '.'
+                print("Empty Seat at row:" + str(r) + " column:" + str(c))
+        #print(row)
+
+##############
+
+inputData = completeData.split("\n")
+
+allSeatCoordinates = []
+for guidelineToOneSeat in inputData:
+    #'    FBFFBBBLRR'
+    seatIndication = guidelineToOneSeat.replace(' ', '')
+    #'FBFFBBBLRR' -> [144,6]
+    seatRowAndColumn = getRowAndColumn(seatIndication)
+    #[[144,6], [122,1]]
+    allSeatCoordinates.append(seatRowAndColumn)
+
+allSeatCoordinates.sort()
+prettyPrint(allSeatCoordinates)
